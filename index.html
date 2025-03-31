@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Hello</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background 0.5s ease;
+        }
+        #message {
+            font-size: 50px;
+            font-weight: bold;
+            color: #eeeeee;
+            background: #4A90A2;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="message"></div>
+    <script>
+        function updateDisplay() {
+            let now = new Date();
+            let minutes = now.getMinutes();
+            let withinTimeFrame = minutes % 30 === 0 || minutes % 30 === 1 || minutes % 30 === 2;
+            let msg = document.getElementById('message');
+            let body = document.body;
+            
+            if (withinTimeFrame) {
+                body.style.background = "url('water.jpg') no-repeat center center fixed";
+                body.style.backgroundSize = "cover";
+                msg.textContent = "水分補給をしてください";
+                msg.style.display = "block";
+            } else {
+                body.style.background = "#eeeeee";
+                msg.textContent = "30分おきに水分補給を促します";
+                msg.style.display = "block";
+            }
+        }
+
+        setInterval(updateDisplay, 1000);
+        updateDisplay();
+    </script>
+</body>
+</html>
